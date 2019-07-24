@@ -1,6 +1,7 @@
 'use strict';
 
-class Item extends React.Component {
+import React from 'react';
+export default class Item extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -8,14 +9,16 @@ class Item extends React.Component {
 
   render() {
     return React.createElement("div", {
-      class: "item"
+      key: this.props.product_id,
+      onClick: this.props.onClick,
+      className: "item"
     }, React.createElement("div", {
       class: "image"
     }, React.createElement("img", {
       src: this.props.image
     })), React.createElement("div", {
       class: "details"
-    }, React.createElement("span", null, React.createElement("strong", null, this.props.title), React.createElement("br", null), this.props.stock > 0 ? "In Stock" : "Not In Stock"), React.createElement("span", {
+    }, React.createElement("span", null, React.createElement("strong", null, this.props.title), React.createElement("br", null), this.props.quantity_in_stock > 0 ? "In Stock" : "Not In Stock"), React.createElement("span", {
       class: "cost"
     }, "$", this.props.price)));
   }

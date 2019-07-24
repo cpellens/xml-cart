@@ -8,23 +8,10 @@
     <link rel="stylesheet" type="text/css" href="//xml.charlespellens.com/style/layout.css">
 </head>
 <body>
-    <section id="left">
-        <button id="refresh">Retrieve New Inventory</button>
-        <br>
-        <section class="items" id="item-container"></section>
-    </section>
-    <section id="cart">
-
-        <section id="cart-list"></section>
-
-        <section id="total">
-            Cart Total:
-        </section>
-        <span id="total-amount">$0.00</span>
-    </section>
-    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-    <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
-    <script src="//xml.charlespellens.com/js/main.js" type="text/javascript"></script>
+    <section id="left"></section>
+    <section id="cart"></section>
+    <script src="//cdn.charlespellens.com/jquery-3.4.1.min.js"></script>
+    <script src="//cdn.charlespellens.com/jquery-ui.min.js"></script>
+    <script src="//xml.charlespellens.com/dist/main.js"></script>
 </body>
 </html>

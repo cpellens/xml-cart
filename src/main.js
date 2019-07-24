@@ -1,4 +1,5 @@
-import "./components/component.cartitem";
-import { Item } from "./components/component.item";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Cart from './components/component.cart.js';
 
-ReactDOM.render(<CartItem></CartItem>, document.getElementById("cart-items"))
+ReactDOM.render(<Cart></Cart>, document.getElementById("cart"))

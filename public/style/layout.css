@@ -17,19 +17,24 @@ section {
 
 section#left {
     flex: 2;
+    max-width: 66vw;
 }
 
 section#cart {
     border: 0.2vmin solid #7B7;
     background-color: #EFD;
     box-sizing: border-box;
-    min-width: 300px;
+    /* min-width: 300px; */
+    position: fixed;
+    right: 2vmin;
+    width: 34vw;
+    height: 96vh;
+    top: 2vmin;
 }
 
 section.items {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 1vmin;
     margin-left: -1vmin;
     padding-right: 1vmin;
     box-sizing: border-box;
@@ -46,7 +51,13 @@ section.items > div.item {
     display: flex;
     background-color: #ddd;
     font-size: 2vmin;
-    user-select: none;
+    -webkit-user-drag: element;
+}
+
+#item-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3vmin;
 }
 
 #item-container div.item > div {
@@ -57,7 +68,7 @@ section.items > div.item {
 
 #item-container div.item > div.image > img {
     width: 100%;
-    user-select: none;
+    /* user-select: none; */
     -webkit-user-drag: none;
 }
 
@@ -85,6 +96,8 @@ button#refresh {
     stroke: none;
     outline: none;
     height: 4vmin;
+    margin-top: -1vmin;
+    position: absolute;
 }
 
 button#refresh:hover {
@@ -98,7 +111,7 @@ section#total {
     line-height: 4vmin;
     display: flex;
     color: #272;
-    font-size: 4vmin;
+    font-size: 3vmin;
     padding-left: 1vmin;
     font-weight: bold;
 }
@@ -111,7 +124,7 @@ span#total-amount {
     height: 4vmin;
     line-height: 4vmin;
     color: red;
-    font-size: 4vmin;
+    font-size: 3vmin;
     font-weight: bolder;
 }
 
@@ -172,4 +185,48 @@ span#total-amount {
 #cart-list div.item > div.right button:hover {
     background-color: #272;
     cursor: pointer;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#opaque-white {
+    width: 66vw;
+    height: 93vh;
+    background-color: rgba(255, 255, 255, 0);
+    position: absolute; 
+    pointer-events: none;
+    text-align: center;
+    line-height: 96vh;
+    color: black;
+    font-size: 3.7vmin;
+    color: rgba(0, 0, 0, 0);
+
+    transition: background-color 0.25s, color 0.25s;
+}
+
+#opaque-white img.spin {
+    height: 3.7vmin;
+    width: 3.7vmin;
+    vertical-align: middle;
+    opacity: 0;
+    transition: opacity 0.25s;
+    animation: spin linear 2s infinite;
+}
+
+#opaque-white.opaque {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    pointer-events: all;
+}
+
+#opaque-white.opaque img.spin {
+    opacity: 1;
 }
