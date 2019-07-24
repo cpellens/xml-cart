@@ -1,6 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-
 import Item from './component.item'
 
 export default class Catalog extends React.Component {
@@ -34,16 +32,24 @@ export default class Catalog extends React.Component {
         })
     }
 
+    onDragStart(item) {
+        this.props.onDragStart(item);
+    }
+
+    onDragStop() {
+        this.props.onDragStop();
+    }
+
     render() {
-        return  <section class="items list">
+        return  <section className="items list">
                     <div id="opaque-white">
-                        <img class="spin" src="//cdn.charlespellens.com/ico/synchronize.svg" /> Please wait. Retrieving results...
+                        <img className="spin" src="//cdn.charlespellens.com/ico/synchronize.svg" /> Please wait. Retrieving results...
                     </div>
                     <button id="refresh" onClick={() => this.reload()}>Retrieve New Inventory</button>
-                    <section id="item-container" class="items list">
+                    <section id="item-container" className="items list">
                         {
                             this.state.items.map(
-                                    (item) => <Item key={item.product_id} onClick={() => this.props.onClick(item)} title={item.product_name} product_id={item.product_id} quantity_in_stock={item.quantity_in_stock} image={"http://partechgss.com" + item.product_img} price={item.unit_price}></Item>
+                                    (item) => <Item onDragStop={this.onDragStop.bind(this)} onDragStart={() => this.onDragStart.bind(this)(item)} key={item.product_id} onClick={() => this.props.onClick(item)} title={item.product_name} product_id={item.product_id} quantity_in_stock={item.quantity_in_stock} product_img={"http://partechgss.com" + item.product_img} price={item.unit_price}></Item>
                             )
                         }
                     </section>

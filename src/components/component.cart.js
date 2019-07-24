@@ -9,13 +9,31 @@ export default class Cart extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            items: []
-        };
+        if (!this.state) {
+            this.state = {
+                items: [],
+                hover: false,
+                selected_item: null
+            };
+        }
 
-        ReactDOM.render(<Catalog onClick={(item) => this.addItem.bind(this)(item)}></Catalog>, document.getElementById("left"))
+        ReactDOM.render(<Catalog onDragStart={(item) => this.onDragStart.bind(this)(item)} onDragStop={this.onDragEnd.bind(this)} onClick={(item) => this.addItem.bind(this)(item)}></Catalog>, document.getElementById("left"))
 
         this.loadCart();
+    }
+
+    onDragStart(item) {
+        this.setState({selected_item: item});
+    }
+
+    onDragEnd() {
+
+        if (this.state.hover) {
+            console.log(this.state.selected_item)
+            this.addItem(this.state.selected_item);
+        }
+
+        this.setState({selected_item: null, hover: false});
     }
 
     getCart() {
@@ -29,13 +47,26 @@ export default class Cart extends React.Component {
 
         return cart
     }
-
+    
     loadCart() {
         var stored_cart = localStorage.getItem("cart");
         if (!stored_cart)
             return;
 
-        this.updateCart(JSON.parse(stored_cart));
+        var item_array = [];
+        stored_cart = JSON.parse(stored_cart);
+
+        for (var i in stored_cart) {
+            if (isNaN(i))
+                continue;
+
+            if (stored_cart[i] == null)
+                continue;
+
+            item_array.push(stored_cart[i])
+        }
+
+        this.state = {items: item_array};
     }
 
     addItem(item) {
@@ -48,7 +79,6 @@ export default class Cart extends React.Component {
             if (cart[i].product_id == item.product_id) {
                 found_item = true;
                 cart[i].quantity++;
-                console.log("Item already in the stuff")
             }
         }
 
@@ -57,12 +87,10 @@ export default class Cart extends React.Component {
                 product_id: item.product_id,
                 price: item.unit_price,
                 title: item.product_name,
+                product_img: item.product_img,
                 quantity: 1
             });
-            console.log("item wasnt found - add")
         }
-
-        console.log(cart)
 
         this.setState({
             items: cart
@@ -73,14 +101,18 @@ export default class Cart extends React.Component {
 
     // store the cart items in the browser's localStorage service
     saveCart() {
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem("cart", JSON.stringify(this.getCart()));
     }
 
     updateCart(cart) {
         if (this.state == null)
-            this.state = {items: []}
+            this.state = {items: cart}
 
-        this.setState({items: cart});
+        try {
+            this.setState({items: cart});
+        } catch (E) {
+            this.state = {items: cart};
+        }
     }
 
     removeItem(item) {
@@ -109,12 +141,15 @@ export default class Cart extends React.Component {
     }
 
     render() {
-        return <div>
-                    <section id="cart-list" class="list">
+        return  <div onTouchMove={(e) => this.setState({hover: true})} onDragOver={(e) => this.setState({hover: true})} style={{backgroundColor: this.state.hover ? "rgba(255, 255, 255, 0.5)" : "transparent"}}>
+                    <section id="cart-list" className={"list"}>
                         {
-                            this.state.items.map((item) => <CartItem onClick={() => this.removeItem.bind(this)(item)} title={item.title} quantity={item.quantity} product_id={item.product_id} price={item.price}></CartItem>)
+                            this.state.items.map((item) => <CartItem onClick={() => this.removeItem.bind(this)(item)} title={item.title} product_img={item.product_img} quantity={item.quantity} product_id={item.product_id} price={item.price}></CartItem>)
                         }
                     </section>
+                    <div style={{textAlign: "right"}}>
+                        <button onClick={() => this.saveCart.bind(this)()} id="checkout">Checkout</button>
+                    </div>
                     <section id="total">
                         Cart Total:
                     </section>

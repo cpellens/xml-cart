@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.66, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Partech XML Processing Sample</title>
     <link rel="stylesheet" type="text/css" href="//xml.charlespellens.com/style/layout.css">
@@ -13,5 +13,8 @@
     <script src="//cdn.charlespellens.com/jquery-3.4.1.min.js"></script>
     <script src="//cdn.charlespellens.com/jquery-ui.min.js"></script>
     <script src="//xml.charlespellens.com/dist/main.js"></script>
+    <script>
+        window.addEventListener('touchmove', function() {});
+    </script>
 </body>
 </html>

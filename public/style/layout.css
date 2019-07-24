@@ -26,9 +26,10 @@ section#cart {
     box-sizing: border-box;
     /* min-width: 300px; */
     position: fixed;
-    right: 2vmin;
+    right: 4vmin;
+    margin-top: 2vmin;
     width: 34vw;
-    height: 96vh;
+    height: 92vh;
     top: 2vmin;
 }
 
@@ -52,6 +53,7 @@ section.items > div.item {
     background-color: #ddd;
     font-size: 2vmin;
     -webkit-user-drag: element;
+    pointer-events: visible;
 }
 
 #item-container {
@@ -86,7 +88,7 @@ section.items > div.item {
     color: red;
 }
 
-button#refresh {
+button#refresh, button#checkout {
     border: 0.2vmin solid black;
     padding: 1vmin;
     font-size: 1.5vmin;
@@ -98,6 +100,12 @@ button#refresh {
     height: 4vmin;
     margin-top: -1vmin;
     position: absolute;
+}
+
+button#checkout {
+    position: absolute;
+    bottom: 7vmin;
+    right: 3vmin;
 }
 
 button#refresh:hover {
@@ -131,6 +139,11 @@ span#total-amount {
 /*
  cart item styling
 */
+
+#cart-list {
+    height: 79vh;
+    overflow: auto;
+}
 
 #cart-list div.item {
     margin: 1vmin;

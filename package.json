@@ -10,7 +10,6 @@
     "jquery": "^3.4.1",
     "jquery-mobile": "^1.5.0-alpha.1",
     "jquery-ui": "^1.12.1",
-    "react-dnd": "^9.3.2",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {

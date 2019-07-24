@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Item from './component.item';
 export default class Catalog extends React.Component {
   constructor(props) {
@@ -30,27 +29,37 @@ export default class Catalog extends React.Component {
     });
   }
 
+  onDragStart(item) {
+    this.props.onDragStart(item);
+  }
+
+  onDragStop() {
+    this.props.onDragStop();
+  }
+
   render() {
     return React.createElement("section", {
-      class: "items list"
+      className: "items list"
     }, React.createElement("div", {
       id: "opaque-white"
     }, React.createElement("img", {
-      class: "spin",
+      className: "spin",
       src: "//cdn.charlespellens.com/ico/synchronize.svg"
     }), " Please wait. Retrieving results..."), React.createElement("button", {
       id: "refresh",
       onClick: () => this.reload()
     }, "Retrieve New Inventory"), React.createElement("section", {
       id: "item-container",
-      class: "items list"
+      className: "items list"
     }, this.state.items.map(item => React.createElement(Item, {
+      onDragStop: this.onDragStop.bind(this),
+      onDragStart: () => this.onDragStart.bind(this)(item),
       key: item.product_id,
       onClick: () => this.props.onClick(item),
       title: item.product_name,
       product_id: item.product_id,
       quantity_in_stock: item.quantity_in_stock,
-      image: "http://partechgss.com" + item.product_img,
+      product_img: "http://partechgss.com" + item.product_img,
       price: item.unit_price
     }))));
   }

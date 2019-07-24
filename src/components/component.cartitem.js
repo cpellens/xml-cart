@@ -5,15 +5,12 @@ import React from 'react'
 export default class CartItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            quantity: props.quantity
-        }
     }
 
     render() {
         return  <div class="item">
                     <div class="image">
-                        <img src={this.props.image} />
+                        <img src={"http://partechgss.com" + this.props.product_img} />
                     </div>
                     <div class="info"> 
                         <strong>{this.props.title}</strong>
