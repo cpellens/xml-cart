@@ -1,19 +1,24 @@
 'use strict';
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+class CartItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+  render() {
+    return React.createElement("div", {
+      class: "item"
+    }, React.createElement("div", {
+      class: "image"
+    }, React.createElement("img", {
+      src: "https://www.partechgss.com/images/inventory/3.png"
+    })), React.createElement("div", {
+      class: "info"
+    }, React.createElement("strong", null, "Title"), React.createElement("br", null), "Qty: ", this.props.quantity), React.createElement("div", {
+      class: "right"
+    }, React.createElement("button", null, "Remove"), React.createElement("span", {
+      class: "cost"
+    }, "$2.00")));
+  }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CartItem = function (_React$Component) {
-    _inherits(CartItem, _React$Component);
-
-    function CartItem() {
-        _classCallCheck(this, CartItem);
-
-        return _possibleConstructorReturn(this, (CartItem.__proto__ || Object.getPrototypeOf(CartItem)).apply(this, arguments));
-    }
-
-    return CartItem;
-}(React.Component);
+}

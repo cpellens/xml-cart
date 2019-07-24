@@ -15,37 +15,7 @@
     </section>
     <section id="cart">
 
-        <section id="cart-list">
-            <div class="item">
-                <div class="image">
-                    <img src="https://www.partechgss.com/images/inventory/3.png">
-                </div>
-                <div class="info">
-                    <strong>Title</strong>
-                    <br>
-                    Qty: 1
-                </div>
-                <div class="right">
-                    <button>Remove</button>
-                    <span class="cost">$2.00</span>
-                </div>
-            </div>
-
-            <div class="item">
-                <div class="image">
-                    <img src="https://www.partechgss.com/images/inventory/3.png">
-                </div>
-                <div class="info">
-                    <strong>Title</strong>
-                    <br>
-                    Qty: 1
-                </div>
-                <div class="right">
-                    <button>Remove</button>
-                    <span class="cost">$2.00</span>
-                </div>
-            </div>
-        </section>
+        <section id="cart-list"></section>
 
         <section id="total">
             Cart Total:
@@ -55,6 +25,6 @@
     <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
     <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
-    <script src="//xml.charlespellens.com/js/components/component.item.js" type="text/javascript"></script>
+    <script src="//xml.charlespellens.com/js/main.js" type="text/javascript"></script>
 </body>
 </html>
