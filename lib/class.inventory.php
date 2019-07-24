@@ -18,7 +18,7 @@ class Inventory extends SplStack {
 
         $inventory = new Inventory();
 
-        // for each product, get its inner XML. Pass that to Item::FromXMLNode($node)
+        // for each product, get its inner XML. Pass that to a new item instance.
         while ($xml_reader->read()) {
             // we only care about element nodes whose tag name is 'product'
             if ($xml_reader->nodeType == XMLReader::ELEMENT && $xml_reader->name == 'product') {

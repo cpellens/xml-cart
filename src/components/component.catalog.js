@@ -1,6 +1,7 @@
 import React from 'react'
 import Item from './component.item'
 
+// This is the class that is responsible for showing all the Item instances and containing them
 export default class Catalog extends React.Component {
     constructor(props) {
         super(props);
@@ -8,9 +9,11 @@ export default class Catalog extends React.Component {
         this.state = {
             items: []
         }
+
         this.reload();
     }
 
+    // clear the current shown items, show a blank white screen, load the items, uncover the items.
     reload() {
         $("#opaque-white").addClass('opaque')
         $.ajax({
@@ -32,14 +35,17 @@ export default class Catalog extends React.Component {
         })
     }
 
+    // used to pass up the drag events...
     onDragStart(item) {
         this.props.onDragStart(item);
     }
 
+    // used to pass up the drag events
     onDragStop() {
         this.props.onDragStop();
     }
 
+    // output the structure
     render() {
         return  <section className="items list">
                     <div id="opaque-white">

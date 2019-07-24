@@ -5,27 +5,32 @@ import ReactDOM from 'react-dom'
 import Catalog from './component.catalog'
 import CartItem from './component.cartitem'
 
+// the cart class is the 'container' for all the CartItem objects.
 export default class Cart extends React.Component {
     constructor(props) {
         super(props);
 
         if (!this.state) {
             this.state = {
-                items: [],
-                hover: false,
-                selected_item: null
+                items: [],  // the current cart items
+                hover: false,   // are we dragging an item over the cart area?
+                selected_item: null // what item are we dragging over the cart area?
             };
         }
 
+        // output the catalog interface
         ReactDOM.render(<Catalog onDragStart={(item) => this.onDragStart.bind(this)(item)} onDragStop={this.onDragEnd.bind(this)} onClick={(item) => this.addItem.bind(this)(item)}></Catalog>, document.getElementById("left"))
 
+        // do we have a 'session' to reload? (using browser localStorage)
         this.loadCart();
     }
 
+    // traced back from when an item from the catalog is being dragged. we're going to track that item
     onDragStart(item) {
         this.setState({selected_item: item});
     }
 
+    // when the item is "dropped", do we have hover status? if so, consider the item added to cart
     onDragEnd() {
 
         if (this.state.hover) {
@@ -36,6 +41,7 @@ export default class Cart extends React.Component {
         this.setState({selected_item: null, hover: false});
     }
 
+    // returns the current cart data
     getCart() {
         var cart = this.state.items;
 
@@ -48,6 +54,8 @@ export default class Cart extends React.Component {
         return cart
     }
     
+    // loads the cart data from localStorage. localStorage stores our value as a string, so we use JSON.parse to convert
+    // that string into a JSON data object.
     loadCart() {
         var stored_cart = localStorage.getItem("cart");
         if (!stored_cart)
@@ -69,10 +77,12 @@ export default class Cart extends React.Component {
         this.state = {items: item_array};
     }
 
+    // add 1 instance of the provided item to the cart
     addItem(item) {
         var cart = this.getCart();
         var found_item = false;
         
+        // iterating through each of the CURRENT cart items to see if we just need to increment the quantity.
         for (var i in cart) {
             if (isNaN(i))
                 continue;
@@ -82,6 +92,7 @@ export default class Cart extends React.Component {
             }
         }
 
+        // if not, let's add it to our cart 
         if (!found_item) {
             cart.push({
                 product_id: item.product_id,
@@ -92,11 +103,10 @@ export default class Cart extends React.Component {
             });
         }
 
+        // refresh the state of the cart so our UI updates
         this.setState({
             items: cart
         });
-
-        console.log(this.state)
     }
 
     // store the cart items in the browser's localStorage service
@@ -104,6 +114,7 @@ export default class Cart extends React.Component {
         localStorage.setItem("cart", JSON.stringify(this.getCart()));
     }
 
+    // synchroizing cart data we expect with what's actually there
     updateCart(cart) {
         if (this.state == null)
             this.state = {items: cart}
@@ -132,6 +143,7 @@ export default class Cart extends React.Component {
         this.updateCart(cart);
     }
 
+    // return the sum of (quantity * price) per item in the cart
     getTotalCost() {
         var total = 0;
         var cart = this.getCart();
@@ -140,6 +152,7 @@ export default class Cart extends React.Component {
         return total;
     }
 
+    // structure to output
     render() {
         return  <div onTouchMove={(e) => this.setState({hover: true})} onDragOver={(e) => this.setState({hover: true})} style={{backgroundColor: this.state.hover ? "rgba(255, 255, 255, 0.5)" : "transparent"}}>
                     <section id="cart-list" className={"list"}>

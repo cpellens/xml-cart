@@ -1,6 +1,6 @@
 <?php
 
-// used to represent 
+// used to represent one item. this is mainly used for its getArray() method
 class Item  {
     private $product_id,
         $product_name,

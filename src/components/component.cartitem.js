@@ -1,7 +1,6 @@
-'use strict';
-
 import React from 'react'
 
+// This class represents a catalog item in the cart. This doesn't do much other than look pretty on the side.
 export default class CartItem extends React.Component {
     constructor(props) {
         super(props);
